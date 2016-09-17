@@ -1,0 +1,17 @@
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
+
+input.red
+{
+  border:1px solid #f00;
+}
+
+input.green
+{
+  border:1px solid #0f0;
+}
