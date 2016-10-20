@@ -1,0 +1,84 @@
+<fieldset>
+    <h2 id="menu-categories-title" class="text-center">Sign Up Form</h2>
+	<div class="text-center">
+		<p>Please add the requested information in order to sign up for our newsletters!!</p>
+        <p>Fields with (*) are mandatory</p>
+	</div>
+
+    <form name="signUpForm" novalidate >
+      <table>
+        <tr>
+          <td><label>First Name (*): </label></td>
+          <td>
+            <input type="text" name="firstName" placeholder="Pick a first name"
+                ng-model="signupCtrl.userInformation.firstName"
+                required>
+
+            <span ng-class="error" ng-if="signUpForm.firstName.$error.required
+                                          && signUpForm.firstName.$touched">
+                First name is required
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Last Name (*): </label></td>
+          <td>
+            <input type="text" name="lastName" required placeholder="Pick a last name"
+                ng-model="signupCtrl.userInformation.lastName" required >
+            <span ng-class="error" ng-if="signUpForm.lastName.$error.required
+                                          && signUpForm.lastName.$touched">
+                Last name is required
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Email (*): </label></td>
+          <td>
+            <input type="email" name="email" required placeholder="Email"
+                ng-model="signupCtrl.userInformation.emailAddress"
+                required>
+            <span ng-class="error" ng-if="(signUpForm.email.$error.required
+                                          || signUpForm.email.$invalid)
+                                          && signUpForm.email.$touched">
+                Must be a valid email address: handle@domain format
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Phone Number (*): </label></td>
+          <td>
+            <input type="text" name="phone" required placeholder="Phone ###-###-####"
+                ng-model="signupCtrl.userInformation.phoneNumber"
+                pattern="(\d{3})-(\d{3})-(\d{4})">
+            <span ng-class="error" ng-if="(signUpForm.phone.$error.required
+                                          || signUpForm.phone.$invalid)
+                                          && signUpForm.phone.$touched">
+                Phone must be in the format ###-###-####.
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Menu Item (*): </label></td>
+          <td>
+            <input type="text" name="menuItem" placeholder="Pick you favourite menu"
+                ng-model="signupCtrl.userInformation.menuItem"
+                ng-blur="signupCtrl.checkMenuItem()" required>
+            <span ng-class="error" ng-if="(signUpForm.menuItem.$error.required
+                                            && signUpForm.menuItem.$touched)
+                                            || signupCtrl.invalidMenuItem">
+              No such menu number exists
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div>
+          <button ng-click="signupCtrl.signUpUser();"
+              ng-disabled="signUpForm.$invalid || signupCtrl.invalidMenuItem">Sign Up!</button>
+      </div>
+      <br>
+      <div>
+        <span ng-if="signupCtrl.showMessage">Your information has been saved</span>
+      </div>
+    </form>
+</fieldset>
